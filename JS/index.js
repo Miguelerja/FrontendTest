@@ -21,12 +21,12 @@ const searchContainer = document.getElementById('search-container');
 
 const parseResultInfo = (avatar, email, name, bio) => {
   return (
-    `<div class="user-info">
+    `<div class="user-info" id="user-info">
       <div class="personal-details">
         <img src=${avatar} alt="user picture">
         <div class="contact-details">
-          <p><span>@</span> ${email}</p>
-          <p>${name}</p>
+          <p class="italic"><span class="bold">@</span> ${email}</p>
+          <p class="bold">${name}</p>
           <p>${bio}</p>
         </div>
       </div>
@@ -62,27 +62,44 @@ const parseReposList = (repos) => {
   }, '');
 };
 
-const userNotFound = `<p class="error-message">Does not exist</p>`;
-
-const getUserInfo = async () => {
+const generateDOMElements = async () => {
   try{
-    const {
+    let {
       avatar_url: avatar,
       bio,
       name,
       email,
     } = await githubService.getUserInfo(searchField.value);
+
+    (bio === null) ? bio = 'No bio available' : null;
+    (email === null) ? email = 'No email available' : null;
+    (avatar === null) ? avatar = '../assets/images/github-logo.png' : null;
+
     const reposList = await githubService.getRepos(searchField.value);
     const infoHtml = parseResultInfo(avatar, email, name, bio);
-    
+
     (name === undefined)
     ? searchContainer.insertAdjacentHTML('afterend', userNotFound)
     : searchContainer.insertAdjacentHTML('afterend', infoHtml);
-
+  
     const reposContainer = document.getElementById('repos-container');
     reposContainer.insertAdjacentHTML('beforeend', parseReposList(reposList));
-
+  
   }catch(error){console.warn(error)};
 };
+
+const userNotFound = `<p class="error-message" id="error">User does not exist</p>`;
+
+const getUserInfo = () => {
+  if (document.getElementById('user-info') || document.getElementById('error')) {
+    console.log('if');
+    document.getElementById('user-info').remove();
+    generateDOMElements();
+  } else {
+    console.log('else');
+    generateDOMElements();
+  };
+};
+
 
 searchBtn.addEventListener('click', getUserInfo);
