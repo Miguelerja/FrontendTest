@@ -47,7 +47,7 @@ const parseReposList = (repos) => {
     } = repo;
 
     return (finalHtml +
-      `<div class="repo-info>
+      `<div class="repo-info">
         <h3>${name}</h3>
         <div class="repo-activity">
           <i class="fas fa-star"></i>
@@ -78,7 +78,8 @@ const getUserInfo = async () => {
     ? searchContainer.insertAdjacentHTML('afterend', userNotFound)
     : searchContainer.insertAdjacentHTML('afterend', infoHtml);
 
-    searchContainer.insertAdjacentHTML('afterend', parseReposList(reposList));
+    const reposContainer = document.getElementById('repos-container');
+    reposContainer.insertAdjacentHTML('beforeend', parseReposList(reposList));
 
   }catch(error){console.warn(error)};
 };

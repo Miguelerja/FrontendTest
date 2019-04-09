@@ -71,6 +71,18 @@ input:focus{
   height: 50%;
 }
 
+/* Repos */
+
+.repo-info {
+  display: flex;
+  justify-content: space-between;
+  width: 25rem;
+}
+
+.repo-activity {
+  display: flex;
+}
+
 /* Error message */
 
 .error-message {
