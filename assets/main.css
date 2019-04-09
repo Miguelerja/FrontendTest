@@ -77,10 +77,18 @@ input:focus{
   display: flex;
   justify-content: space-between;
   width: 25rem;
+  height: 4rem;
+  line-height: 2rem;
 }
 
 .repo-activity {
   display: flex;
+}
+
+.repo-activity p, .repo-activity i {
+  margin: 0 0.1rem;
+  height: 4rem;
+  line-height: 4rem;
 }
 
 /* Error message */
