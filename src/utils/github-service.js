@@ -4,7 +4,7 @@ class GithubService {
       const userInfo = await fetch(`https://api.github.com/users/${user}`);
       return userInfo.json();
     } catch (error) {
-      console.warn(error)
+      return error;
     };
   };
 
@@ -13,7 +13,7 @@ class GithubService {
       const userRepos = await fetch(`https://api.github.com/users/${user}/repos`);
       return userRepos.json();
     } catch (error) {
-      console.warn(error)
+      return error;
     };
   }
 };

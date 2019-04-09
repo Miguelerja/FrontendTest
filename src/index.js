@@ -1,5 +1,9 @@
 import githubService from './utils/github-service';
-import { parseResultInfo, parseReposList, userNotFound } from './utils/infoHtmlParsers';
+import {
+  parseResultInfo, 
+  parseReposList, 
+  userNotFound,
+} from './utils/infoHtmlParsers';
 
 const searchField = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-btn');
@@ -19,23 +23,23 @@ const generateDOMElements = async () => {
     (avatar === null) ? avatar = '../assets/images/github-logo.png': null;
 
     const reposList = await githubService.getRepos(searchField.value);
-    const infoHtml = parseResultInfo(avatar, email, name, bio);
+    const userInfoHtml = parseResultInfo(avatar, email, name, bio);
 
-    (name === undefined) 
+    (reposList.message === 'Not Found') 
       ? searchContainer.insertAdjacentHTML('afterend', userNotFound)
-      : searchContainer.insertAdjacentHTML('afterend', infoHtml);
+      : searchContainer.insertAdjacentHTML('afterend', userInfoHtml);
 
     const reposContainer = document.getElementById('repos-container');
     reposContainer.insertAdjacentHTML('beforeend', parseReposList(reposList));
 
   } catch (error) {
-    console.warn(error)
+    console.error(error);
   };
 };
 
 const getUserInfo = () => {
   const error = document.getElementById('error');
-  const userInfo = document.getElementById(user-info);
+  const userInfo = document.getElementById('user-info');
 
   if (userInfo) {
     userInfo.remove();
