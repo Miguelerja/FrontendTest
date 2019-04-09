@@ -30,9 +30,10 @@ const parseResultInfo = (avatar, email, name, bio) => {
           <p>${bio}</p>
         </div>
       </div>
-      <div class="repositories" id="repos-container">
+      <div>
         <h3>Repositories</h3>
         <hr>
+        <div class="repositories" id="repos-container"></div>
       </div>
     </div>`
   );

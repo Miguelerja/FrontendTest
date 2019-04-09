@@ -17,7 +17,7 @@ input:focus{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20vh auto 0;
+  margin: 12vh auto 0;
   width: 40vw;
   background-color: #FFFFFF;
   border-radius: 5%;
@@ -27,13 +27,14 @@ input:focus{
 /* Search section */
 
 .search-container {
+  width: 95%;
   margin: auto;
   padding: 3.5vh 0;
 }
 .search-container input {
   font-size: 1rem;
   height: 3rem;
-  width: 20rem;
+  width: 75%;
   border: 1px solid #F0F0F0;
   border-radius: 5px; 
 }
@@ -46,7 +47,7 @@ input:focus{
   font-size: 1rem;
   font-weight: bold;
   height: 3.5rem;
-  width: 5rem;
+  width: 20%;
   background-color: #F0F0F0;
   border: 1px solid #F0F0F0;
   border-radius: 5px;
@@ -55,7 +56,8 @@ input:focus{
 /* Info */
 
 .user-info {
-  width: 25rem;
+  width: 95%;
+  margin: auto;
 }
 
 .personal-details {
@@ -73,11 +75,23 @@ input:focus{
 
 /* Repos */
 
+.repositories {
+  max-height: 20rem;
+  overflow-y: scroll;
+}
+
+hr{
+  border: none;
+  height: 1.5px;
+  background-color: black;
+}
+
 .repo-info {
   display: flex;
   justify-content: space-between;
-  width: 25rem;
+  width: 95%;
   height: 4rem;
+  margin: auto;
   line-height: 2rem;
 }
 
@@ -89,6 +103,10 @@ input:focus{
   margin: 0 0.1rem;
   height: 4rem;
   line-height: 4rem;
+}
+
+.repo-activity:last-child {
+  padding-right: 0.5rem;
 }
 
 /* Error message */
