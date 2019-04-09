@@ -1,10 +1,17 @@
 class GithubService {
-  async getUserInfoUsers(user) {
+  async getUserInfo(user) {
     try {
-      const info = await fetch(`https://api.github.com/users/${user}`);
-      return info.json();
+      const userInfo = await fetch(`https://api.github.com/users/${user}`);
+      return userInfo.json();
     } catch(error){console.warn(error)};
   };
+
+  async getRepos(user) {
+    try {
+      const userRepos = await fetch(`https://api.github.com/users/${user}/repos`);
+      return userRepos.json();
+    } catch(error){console.warn(error)};
+  }
 };
 
 const githubService = new GithubService();
@@ -15,10 +22,18 @@ const searchContainer = document.getElementById('search-container');
 const parseResultInfo = (avatar, email, name, bio) => {
   return (
     `<div class="user-info">
-      <img src=${avatar} alt="user picture">
-      <p>@ ${email}</p>
-      <p>${name}</p>
-      <p>${bio}</p>
+      <div class="personal-details">
+        <img src=${avatar} alt="user picture">
+        <div class="contact-details">
+          <p><span>@</span> ${email}</p>
+          <p>${name}</p>
+          <p>${bio}</p>
+        </div>
+      </div>
+      <div class="repositories">
+        <h3>Repositories</h3>
+        <hr>
+      </div>
     </div>`
   );
 };
@@ -32,7 +47,9 @@ const getUserInfo = async () => {
       bio,
       name,
       email,
-    } = await githubService.getUserInfoUsers(searchField.value);
+    } = await githubService.getUserInfo(searchField.value);
+    const reposList = await githubService.getRepos(searchField.value);
+    console.log(reposList)
     const infoHtml = parseResultInfo(avatar, email, name, bio);
     
     (name === undefined)
