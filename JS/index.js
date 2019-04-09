@@ -30,12 +30,35 @@ const parseResultInfo = (avatar, email, name, bio) => {
           <p>${bio}</p>
         </div>
       </div>
-      <div class="repositories">
+      <div class="repositories" id="repos-container">
         <h3>Repositories</h3>
         <hr>
       </div>
     </div>`
   );
+};
+
+const parseReposList = (repos) => {
+  return repos.reduce((finalHtml, repo) => {
+    const {
+      name,
+      forks_count,
+      stargazers_count,
+    } = repo;
+
+    return (finalHtml +
+      `<div class="repo-info>
+        <h3>${name}</h3>
+        <div class="repo-activity">
+          <i class="fas fa-star"></i>
+          <p>${stargazers_count}</p>
+          <i class="fas fa-code-branch"></i>
+          <p>${forks_count}</p>
+        </div>
+      </div>
+      `
+    );
+  }, '');
 };
 
 const userNotFound = `<p class="error-message">Does not exist</p>`;
@@ -49,12 +72,14 @@ const getUserInfo = async () => {
       email,
     } = await githubService.getUserInfo(searchField.value);
     const reposList = await githubService.getRepos(searchField.value);
-    console.log(reposList)
     const infoHtml = parseResultInfo(avatar, email, name, bio);
     
     (name === undefined)
     ? searchContainer.insertAdjacentHTML('afterend', userNotFound)
     : searchContainer.insertAdjacentHTML('afterend', infoHtml);
+
+    searchContainer.insertAdjacentHTML('afterend', parseReposList(reposList));
+
   }catch(error){console.warn(error)};
 };
 
