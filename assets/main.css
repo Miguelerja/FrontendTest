@@ -13,12 +13,17 @@ input:focus {
   border-radius: 5px;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 12vh auto 0;
-  width: 40vw;
+  margin: 5vh auto 0;
+  max-width: 40vw;
   background-color: #FFFFFF;
   border-radius: 3%;
   box-shadow: 15px 15px 17px 6px #A8A8A8;
@@ -32,6 +37,10 @@ input:focus {
 
 .italic {
   font-style: italic;
+}
+
+.flex {
+  display: flex;
 }
 
 /* Search section */
@@ -57,7 +66,6 @@ input:focus {
 
 .search-container button {
   font-size: 1rem;
-  font-weight: bold;
   height: 3.5rem;
   width: 20%;
   background-color: #F0F0F0;
@@ -70,10 +78,6 @@ input:focus {
 .user-info {
   width: 95%;
   margin: auto;
-}
-
-.personal-details {
-  display: flex;
 }
 
 .contact-details {
@@ -109,8 +113,12 @@ hr {
   line-height: 2rem;
 }
 
-.repo-activity {
-  display: flex;
+.repo-info a {
+  line-height: 4rem;
+}
+
+.repo-info a:hover {
+  color: #5FA7EB;
 }
 
 .repo-activity p,
@@ -130,7 +138,6 @@ hr {
   border: 1px solid #993702;
   background-color: #F9DEDE;
   border-radius: 5px;
-  font-weight: bold;
   width: 10rem;
   color: #993702;
   padding: 1.5rem 14.5rem 1.5rem 0.5rem;

@@ -26,7 +26,7 @@ const searchContainer = document.getElementById('search-container');
 const parseResultInfo = (avatar, email, name, bio) => {
   return (
     `<div class="user-info" id="user-info">
-      <div class="personal-details">
+      <div class="personal-details flex">
         <img src=${avatar} alt="user picture">
         <div class="contact-details">
           <p class="italic"><span class="bold">@</span> ${email}</p>
@@ -49,12 +49,13 @@ const parseReposList = (repos) => {
       name,
       forks_count,
       stargazers_count,
+      html_url
     } = repo;
 
     return (finalHtml +
       `<div class="repo-info">
-        <h3>${name}</h3>
-        <div class="repo-activity">
+        <a href="${html_url}" target="_blank">${name}</a>
+        <div class="repo-activity flex">
           <i class="fas fa-star"></i>
           <p>${stargazers_count}</p>
           <i class="fas fa-code-branch"></i>
@@ -93,7 +94,7 @@ const generateDOMElements = async () => {
   };
 };
 
-const userNotFound = `<p class="error-message" id="error">User does not exist</p>`;
+const userNotFound = `<p class="error-message bold" id="error">User does not exist</p>`;
 
 const getUserInfo = () => {
   if (document.getElementById('user-info') || document.getElementById('error')) {
