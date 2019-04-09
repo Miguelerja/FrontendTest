@@ -3,14 +3,18 @@ class GithubService {
     try {
       const userInfo = await fetch(`https://api.github.com/users/${user}`);
       return userInfo.json();
-    } catch(error){console.warn(error)};
+    } catch (error) {
+      console.warn(error)
+    };
   };
 
   async getRepos(user) {
     try {
       const userRepos = await fetch(`https://api.github.com/users/${user}/repos`);
       return userRepos.json();
-    } catch(error){console.warn(error)};
+    } catch (error) {
+      console.warn(error)
+    };
   }
 };
 
@@ -63,7 +67,7 @@ const parseReposList = (repos) => {
 };
 
 const generateDOMElements = async () => {
-  try{
+  try {
     let {
       avatar_url: avatar,
       bio,
@@ -71,35 +75,33 @@ const generateDOMElements = async () => {
       email,
     } = await githubService.getUserInfo(searchField.value);
 
-    (bio === null) ? bio = 'No bio available' : null;
-    (email === null) ? email = 'No email available' : null;
-    (avatar === null) ? avatar = '../assets/images/github-logo.png' : null;
+    (bio === null) ? bio = 'No bio available': null;
+    (email === null) ? email = 'No email available': null;
+    (avatar === null) ? avatar = '../assets/images/github-logo.png': null;
 
     const reposList = await githubService.getRepos(searchField.value);
     const infoHtml = parseResultInfo(avatar, email, name, bio);
 
-    (name === undefined)
-    ? searchContainer.insertAdjacentHTML('afterend', userNotFound)
-    : searchContainer.insertAdjacentHTML('afterend', infoHtml);
-  
+    (name === undefined) ?
+    searchContainer.insertAdjacentHTML('afterend', userNotFound): searchContainer.insertAdjacentHTML('afterend', infoHtml);
+
     const reposContainer = document.getElementById('repos-container');
     reposContainer.insertAdjacentHTML('beforeend', parseReposList(reposList));
-  
-  }catch(error){console.warn(error)};
+
+  } catch (error) {
+    console.warn(error)
+  };
 };
 
 const userNotFound = `<p class="error-message" id="error">User does not exist</p>`;
 
 const getUserInfo = () => {
   if (document.getElementById('user-info') || document.getElementById('error')) {
-    console.log('if');
     document.getElementById('user-info').remove();
     generateDOMElements();
   } else {
-    console.log('else');
     generateDOMElements();
   };
 };
-
 
 searchBtn.addEventListener('click', getUserInfo);
