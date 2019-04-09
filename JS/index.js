@@ -94,11 +94,14 @@ const generateDOMElements = async () => {
   };
 };
 
-const userNotFound = `<p class="error-message bold" id="error">User does not exist</p>`;
+const userNotFound = '<p class="error-message bold" id="error">User does not exist</p>';
 
 const getUserInfo = () => {
-  if (document.getElementById('user-info') || document.getElementById('error')) {
+  if (document.getElementById('user-info')) {
     document.getElementById('user-info').remove();
+    generateDOMElements();
+  } else if (document.getElementById('error')) {
+    document.getElementById('error').remove();
     generateDOMElements();
   } else {
     generateDOMElements();
