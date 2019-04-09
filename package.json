@@ -1,0 +1,35 @@
+{
+  "name": "github-search",
+  "version": "1.0.0",
+  "description": "Search app to find github users info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --mode development --open",
+    "start": "webpack -p && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miguelerja/FrontendTest.git"
+  },
+  "author": "Miguel Erja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Miguelerja/FrontendTest/issues"
+  },
+  "homepage": "https://github.com/Miguelerja/FrontendTest#readme",
+  "dependencies": {
+    "css-loader": "^2.1.1",
+    "express": "^4.16.4",
+    "script-loader": "^0.7.2",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0"
+  }
+}
